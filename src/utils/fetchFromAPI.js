@@ -1,10 +1,9 @@
 import axios from 'axios'
 
-const BASE_URL = 'https://youtube-v31.p.rapidapi.com/search'
+const BASE_URL = 'https://youtube-v31.p.rapidapi.com'
 
 const options = {
   // method: 'GET',
-  url: BASE_URL,
   params: {
     // q: 'music',
     // part: 'snippet,id',
@@ -13,8 +12,13 @@ const options = {
     // order: 'date'
   },
   headers: {
-    'X-RapidAPI-Key': '55befbfce8msh034498b74098ffap10ba49jsn38a5452540de',
+    'X-RapidAPI-Key': import.meta.env.VITE_RAPID_API_KEY,
     'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
   }
 };
 
+export const fetchFromAPI = async (url) => {
+  const {data} = await axios.get(`${BASE_URL}/${url}`, options);
+
+  return data;
+}
